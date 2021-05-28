@@ -10,10 +10,10 @@ pipeline {
             steps {
                 echo "in Build Stage"
                 echo env.BRANCH_NAME
-                script{
+                sh '''
                     pwd
-                    ls
-                }
+                    ls -l
+                '''
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
                     sh "exit 1"
                 }
