@@ -3,18 +3,18 @@ pipeline {
     stages {
         stage("Checkout"){
             steps {
-                echo "in checkout"
-                echo env.BRANCN_NAME
-                echo env.CHANGE_ID
-                echo env.CHANGE_TARGET
+                echo "checkout"
             }
         }
         stage("Build"){
             steps {
                 echo "in Build Stage"
                 echo env.BRANCH_NAME
+                script{
+                    pwd
+                    ls
+                }
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
-                    sh "ret=`wc -l src/1.r` && echo $ret"
                     sh "exit 1"
                 }
             }
@@ -22,7 +22,7 @@ pipeline {
         stage("test"){
             steps{
                 script{
-                    cat src/1.r
+                    sh "cat src/1.r"
                 }
             }
         }
