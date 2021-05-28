@@ -3,7 +3,10 @@ pipeline {
     stages {
         stage("Checkout"){
             steps {
-                checkout scm
+                echo "in checkout"
+                echo env.BRANCN_NAME
+                echo env.CHANGE_ID
+                echo env.CHANGE_TARGET
             }
         }
         stage("Build"){
